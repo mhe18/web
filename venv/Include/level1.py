@@ -10,7 +10,7 @@ page_header = """
   </head>
 
   <body id="level1">
-    <img src="https://xss-game.appspot.com/static/logos/level1.png">
+    <img src="static/logos/level1.png">
       <div>
 """
 
@@ -44,7 +44,7 @@ class MainPage(webapp2.RequestHandler):
         else:
             query = self.request.get('query', '[empty]')
             query = urllib2.quote(query, safe='~@#$&()*!+=:;,.?/\'') # use urllib2.quote(), the same as encodeURI() in js
-            print query
+            #print query
 
             # Our search engine broke, we found no results :-(
             message = "Sorry, no results were found for <b>" + query + "</b>."
@@ -61,7 +61,13 @@ application = webapp2.WSGIApplication([('.*', MainPage), ], debug=False)
 
 def main():
     from paste import httpserver
-    httpserver.serve(application, host='127.0.0.1', port='8080')
+    from paste.cascade import Cascade
+    from paste.urlparser import StaticURLParser
+    static_app = StaticURLParser("")
+
+    # Create a cascade that looks for static files first, then tries the webapp
+    app = Cascade([static_app, application])
+    httpserver.serve(app, host='127.0.0.1', port='8080')
 
 
 if __name__ == '__main__':
