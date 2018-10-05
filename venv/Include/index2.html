@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://xss-game.appspot.com/static/game-frame-styles.css" />
 
     <!-- This is our database of messages -->
-    <script src="https://xss-game.appspot.com/static/post-store.js"></script>
+    <script src="post-store.js"></script>
 
     <script>
       var defaultMessage = "Welcome!<br><br>This is your <i>personal</i>"
@@ -14,6 +14,15 @@
         + "<span style='color: #f00ba7'>madness</span>.";
 
       var DB = new PostDB(defaultMessage);
+      function escapeHTML (unsafe_str) {
+    return unsafe_str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\"/g, '&quot;')
+      .replace(/\'/g, '&#39;')
+      .replace(/\//g, '&#x2F;')
+}
 
       function displayPosts() {
         var containerEl = document.getElementById("post-container");
@@ -27,8 +36,9 @@
 
           html += '<b>You</b>';
           html += '<span class="date">' + new Date(posts[i].date) + '</span>';
-          html += "<blockquote>" + posts[i].message + "</blockquote";
+          html += "<blockquote>" + posts[i].message + "</blockquote>";
           html += "</td></tr></table>"
+
           containerEl.innerHTML += html;
         }
       }
@@ -41,6 +51,7 @@
 
         document.getElementById('post-form').onsubmit = function() {
           var message = document.getElementById('post-content').value;
+          message = escapeHTML(message)
           DB.save(message, function() { displayPosts() } );
           document.getElementById('post-content').value = "";
           return false;
