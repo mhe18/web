@@ -5,7 +5,14 @@
     <script src="/static/game-frame.js"></script>
     <link rel="stylesheet" href="/static/game-frame-styles.css" />
 
-    <script>
+
+  </head>
+
+  <body id="level6">
+    <img src="/static/logos/level6.png">
+    <img id="cube" src="/static/level6_cube.png">
+    <div id="log">Loading gadget...</div>
+     <script>
     function setInnerText(element, value) {
       if (element.innerText) {
         element.innerText = value;
@@ -16,6 +23,7 @@
 
     function includeGadget(url) {
       var scriptEl = document.createElement('script');
+      //console.log(document.getElementById("log").innerText,document.getElementById("log").textContent)
 
       // This will totally prevent us from loading evil URLs!
       if (url.match(/^https?:\/\//)) {
@@ -23,6 +31,12 @@
           "Sorry, cannot load a URL containing \"http\".");
         return;
       }
+      if (!(url.match(/^\/static\//))) {
+          setInnerText(document.getElementById("log"),
+              "Sorry, cannot load a file which is not local");
+          return;
+      }
+
 
       // Load this awesome gadget
       scriptEl.src = url;
@@ -55,11 +69,5 @@
     }, false);
 
     </script>
-  </head>
-
-  <body id="level6">
-    <img src="/static/logos/level6.png">
-    <img id="cube" src="/static/level6_cube.png">
-    <div id="log">Loading gadget...</div>
   </body>
 </html>
