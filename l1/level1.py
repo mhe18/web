@@ -39,7 +39,7 @@ class MainPage(webapp2.RequestHandler):
 
     def get(self):
         # Disable the reflected XSS filter for demonstration purposes
-        self.response.headers.add_header("X-XSS-Protection", "0")
+        #self.response.headers.add_header("X-XSS-Protection", "0")
 
         if not self.request.get('query'):
             # Show main search page
