@@ -8,8 +8,8 @@ page_header = """
 <html>
   <head>
     <!-- Internal game scripts/styles, mostly boring stuff -->
-    <script src="https://xss-game.appspot.com/static/game-frame.js"></script>
-    <link rel="stylesheet" href="https://xss-game.appspot.com/static/game-frame-styles.css" />
+    <script src="/static/game-frame.js"></script>
+    <link rel="stylesheet" href=“/static/game-frame-styles.css" />
   </head>
 
   <body id="level1">
