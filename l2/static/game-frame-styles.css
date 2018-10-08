@@ -84,7 +84,7 @@ body {
 
 #level2 .shim {
   position: absolute;
-  background: url("//ssl.gstatic.com/s2/oz/images/sprites/stream-e001443aa61c5529c1aa133a9c12bb49.png") no-repeat scroll -119px -52px transparent;
+  background: url("stream-e001443aa61c5529c1aa133a9c12bb49.png") no-repeat scroll -119px -52px transparent;
   margin-left: -20px;
   top: 15px;
   height: 21px;

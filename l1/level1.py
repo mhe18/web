@@ -8,6 +8,7 @@ page_header = """
 <html>
   <head>
     <!-- Internal game scripts/styles, mostly boring stuff -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
     <script src="static/game-frame.js"></script>
     <link rel="stylesheet" href='static/game-frame-styles.css' />
   </head>
